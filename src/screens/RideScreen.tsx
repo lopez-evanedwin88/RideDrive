@@ -113,17 +113,43 @@ const RiderScreen: React.FC = () => {
       </View>
 
       {status !== Status.DROPED_OFF ? (
-        <Button
-          title={btnActions[0][status].title}
-          onPress={btnActions[0][status].updateStatus}
-        />
+        <>
+          {status !== Status.DECLINED ? (
+            <View>
+              <Button
+                title={btnActions[0][status].title}
+                onPress={btnActions[0][status].updateStatus}
+              />
+              {status === Status.PENDING && (
+                <Button
+                  title={'DECLINE RIDER'}
+                  onPress={() => {
+                    updateRideStatus(id, Status.DECLINED);
+                  }}
+                />
+              )}
+            </View>
+          ) : (
+            <View style={[styles.row, {alignSelf: 'center'}]}>
+              <Text
+                style={[
+                  styles.label,
+                  {fontStyle: 'italic', fontWeight: 'bold', color: 'red'},
+                ]}>
+                Rider declined
+              </Text>
+            </View>
+          )}
+        </>
       ) : (
-        <View
-          style={[
-            styles.row,
-            {alignSelf: 'center'},
-          ]}>
-          <Text style={[styles.label, {fontStyle: 'italic', fontWeight: 'bold', color: 'green'}]}>Rider arrived at destination</Text>
+        <View style={[styles.row, {alignSelf: 'center'}]}>
+          <Text
+            style={[
+              styles.label,
+              {fontStyle: 'italic', fontWeight: 'bold', color: 'green'},
+            ]}>
+            Rider arrived at destination
+          </Text>
         </View>
       )}
     </View>
