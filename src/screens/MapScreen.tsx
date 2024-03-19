@@ -21,8 +21,8 @@ const MapScreen: React.FC = () => {
           <Marker
             key={marker.id}
             coordinate={{
-              latitude: marker.latitude,
-              longitude: marker.longitude,
+              latitude: marker.pickupLocation.latitude,
+              longitude: marker.pickupLocation.longitude,
             }}
             title={marker.name}
             description={marker.description}
