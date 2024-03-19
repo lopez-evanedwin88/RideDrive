@@ -1,10 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import markerReducers from './marker/markerReducers';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { markersReducer } from './reducers/markerReducers';
 
-const store = configureStore({
-  reducer: {
-    markers: markerReducers,
-  },
-});
-
-export default store;
+const rootReducer = combineReducers({
+    markers: markersReducer,
+    // Add other reducers here if you have them
+  });
+  
+  export const store = configureStore({
+    reducer: rootReducer,
+  });
